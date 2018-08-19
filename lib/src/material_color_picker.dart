@@ -26,18 +26,15 @@ const List<MaterialColor> materialColors = const <MaterialColor>[
 class MaterialColorPicker extends StatefulWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
-  final VoidCallback onColorSelected;
   final WrapAlignment colorsAlignement;
   final List<MaterialColor> colors;
 
-  const MaterialColorPicker(
-      {Key key,
-      this.selectedColor,
-      this.onColorChange,
-      this.onColorSelected,
-      this.colorsAlignement = WrapAlignment.start,
-      this.colors = materialColors})
-      : super(key: key);
+  const MaterialColorPicker({Key key,
+    this.selectedColor,
+    this.onColorChange,
+    this.colorsAlignement = WrapAlignment.start,
+    this.colors = materialColors})
+      : assert(colors != null), super(key: key);
 
   @override
   _MaterialColorPickerState createState() => _MaterialColorPickerState();
@@ -47,6 +44,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   static const double _kCircleColorSize = 47.0;
   static const double _kPadding = 9.0;
 
+  static final defaultColors = materialColors;
+  static final defaultValue = materialColors[0];
+
   MaterialColor _mainColor;
   Color _shadeColor;
   bool _isMainSelection;
@@ -54,15 +54,55 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   @override
   void initState() {
     super.initState();
-    _mainColor = widget.colors[0];
-    _shadeColor = _mainColor.shade500;
-    _isMainSelection = true;
+    _initSelectedValue();
+  }
+
+  @protected
+  void didUpdateWidget(covariant MaterialColorPicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _initSelectedValue();
+  }
+
+  void _initSelectedValue() {
+    Color shadeColor = widget.selectedColor ?? defaultValue;
+    MaterialColor mainColor = _findMainColor(shadeColor);
+
+    if (mainColor == null) {
+      mainColor = (widget.colors != null) ? widget.colors[0] : defaultValue;
+      shadeColor = mainColor.shade500;
+    }
+
+    setState(() {
+      _mainColor = mainColor;
+      _shadeColor = shadeColor;
+      _isMainSelection = true;
+    });
+  }
+
+  MaterialColor _findMainColor(Color shadeColor) {
+    for (final mainColor in widget.colors)
+      if (_isShadeOfMain(mainColor, shadeColor))
+        return mainColor;
+
+    return null;
+  }
+
+  bool _isShadeOfMain(MaterialColor mainColor, Color shadeColor) {
+    List<Color> shades = _getMaterialColorShades(mainColor);
+
+    for (var shade in shades)
+      if (shade == shadeColor)
+        return true;
+
+    return false;
   }
 
   void _onMainColorSelected(MaterialColor color) {
+    var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
+
     setState(() {
       _mainColor = color;
-      _shadeColor = _mainColor.shade500;
+      _shadeColor = isShadeOfMain ? _shadeColor : color.shade500;
       _isMainSelection = false;
     });
   }
