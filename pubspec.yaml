@@ -1,0 +1,13 @@
+name: color_picker
+description: Color picker for Flutter
+version: 0.0.1
+author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
+homepage: https://github.com/pyozer/color_picker
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
