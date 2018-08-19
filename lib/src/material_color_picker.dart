@@ -26,15 +26,17 @@ const List<MaterialColor> materialColors = const <MaterialColor>[
 class MaterialColorPicker extends StatefulWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
-  final WrapAlignment colorsAlignement;
+  final WrapAlignment colorsAlignment;
   final List<MaterialColor> colors;
 
-  const MaterialColorPicker({Key key,
-    this.selectedColor,
-    this.onColorChange,
-    this.colorsAlignement = WrapAlignment.start,
-    this.colors = materialColors})
-      : assert(colors != null), super(key: key);
+  const MaterialColorPicker(
+      {Key key,
+      this.selectedColor,
+      this.onColorChange,
+      this.colorsAlignment = WrapAlignment.start,
+      this.colors = materialColors})
+      : assert(colors != null),
+        super(key: key);
 
   @override
   _MaterialColorPickerState createState() => _MaterialColorPickerState();
@@ -44,8 +46,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   static const double _kCircleColorSize = 47.0;
   static const double _kPadding = 9.0;
 
-  static final defaultColors = materialColors;
-  static final defaultValue = materialColors[0];
+  static final _defaultValue = materialColors[0];
 
   MaterialColor _mainColor;
   Color _shadeColor;
@@ -64,11 +65,11 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   void _initSelectedValue() {
-    Color shadeColor = widget.selectedColor ?? defaultValue;
+    Color shadeColor = widget.selectedColor ?? _defaultValue;
     MaterialColor mainColor = _findMainColor(shadeColor);
 
     if (mainColor == null) {
-      mainColor = (widget.colors != null) ? widget.colors[0] : defaultValue;
+      mainColor = (widget.colors != null) ? widget.colors[0] : _defaultValue;
       shadeColor = mainColor.shade500;
     }
 
@@ -81,8 +82,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   MaterialColor _findMainColor(Color shadeColor) {
     for (final mainColor in widget.colors)
-      if (_isShadeOfMain(mainColor, shadeColor))
-        return mainColor;
+      if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
     return null;
   }
@@ -90,9 +90,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   bool _isShadeOfMain(MaterialColor mainColor, Color shadeColor) {
     List<Color> shades = _getMaterialColorShades(mainColor);
 
-    for (var shade in shades)
-      if (shade == shadeColor)
-        return true;
+    for (var shade in shades) if (shade == shadeColor) return true;
 
     return false;
   }
@@ -181,6 +179,6 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
             spacing: _kPadding,
             children: listChildren,
             verticalDirection: VerticalDirection.down,
-            alignment: widget.colorsAlignement));
+            alignment: widget.colorsAlignment));
   }
 }
