@@ -14,8 +14,7 @@ class MaterialColorPicker extends StatefulWidget {
       this.onColorChange,
       this.colorsAlignment = WrapAlignment.start,
       this.colors = materialColors})
-      : assert(colors != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   _MaterialColorPickerState createState() => _MaterialColorPickerState();
