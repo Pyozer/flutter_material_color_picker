@@ -27,6 +27,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   static final _defaultValue = materialColors[0];
 
+  List<ColorSwatch> _colors = materialColors;
+
   ColorSwatch _mainColor;
   Color _shadeColor;
   bool _isMainSelection;
@@ -44,11 +46,13 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   void _initSelectedValue() {
+    if (widget.colors != null) _colors = widget.colors;
+
     Color shadeColor = widget.selectedColor ?? _defaultValue;
     ColorSwatch mainColor = _findMainColor(shadeColor);
 
     if (mainColor == null) {
-      mainColor = (widget.colors != null) ? widget.colors[0] : _defaultValue;
+      mainColor = _colors[0];
       shadeColor = mainColor[500] ?? mainColor[400];
     }
 
@@ -60,7 +64,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   ColorSwatch _findMainColor(Color shadeColor) {
-    for (final mainColor in widget.colors)
+    for (final mainColor in _colors)
       if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
     return null;
@@ -150,7 +154,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   @override
   Widget build(BuildContext context) {
     final listChildren = _isMainSelection
-        ? _buildListMainColor(widget.colors)
+        ? _buildListMainColor(_colors)
         : _buildListShadesColor(_mainColor);
 
     return Container(
