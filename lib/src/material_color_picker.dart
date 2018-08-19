@@ -1,33 +1,12 @@
 import 'package:color_picker/src/circle_color.dart';
+import 'package:color_picker/src/colors.dart';
 import 'package:flutter/material.dart';
-
-const List<MaterialColor> materialColors = const <MaterialColor>[
-  Colors.red,
-  Colors.pink,
-  Colors.purple,
-  Colors.deepPurple,
-  Colors.indigo,
-  Colors.blue,
-  Colors.lightBlue,
-  Colors.cyan,
-  Colors.teal,
-  Colors.green,
-  Colors.lightGreen,
-  Colors.lime,
-  Colors.yellow,
-  Colors.amber,
-  Colors.orange,
-  Colors.deepOrange,
-  Colors.brown,
-  Colors.grey,
-  Colors.blueGrey
-];
 
 class MaterialColorPicker extends StatefulWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
   final WrapAlignment colorsAlignment;
-  final List<MaterialColor> colors;
+  final List<ColorSwatch> colors;
 
   const MaterialColorPicker(
       {Key key,
@@ -48,7 +27,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   static final _defaultValue = materialColors[0];
 
-  MaterialColor _mainColor;
+  ColorSwatch _mainColor;
   Color _shadeColor;
   bool _isMainSelection;
 
@@ -66,11 +45,11 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   void _initSelectedValue() {
     Color shadeColor = widget.selectedColor ?? _defaultValue;
-    MaterialColor mainColor = _findMainColor(shadeColor);
+    ColorSwatch mainColor = _findMainColor(shadeColor);
 
     if (mainColor == null) {
       mainColor = (widget.colors != null) ? widget.colors[0] : _defaultValue;
-      shadeColor = mainColor.shade500;
+      shadeColor = mainColor[500] ?? mainColor[400];
     }
 
     setState(() {
@@ -80,14 +59,14 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     });
   }
 
-  MaterialColor _findMainColor(Color shadeColor) {
+  ColorSwatch _findMainColor(Color shadeColor) {
     for (final mainColor in widget.colors)
       if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
     return null;
   }
 
-  bool _isShadeOfMain(MaterialColor mainColor, Color shadeColor) {
+  bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
     List<Color> shades = _getMaterialColorShades(mainColor);
 
     for (var shade in shades) if (shade == shadeColor) return true;
@@ -95,9 +74,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     return false;
   }
 
-  void _onMainColorSelected(MaterialColor color) {
+  void _onMainColorSelected(ColorSwatch color) {
     var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
-    final shadeColor = isShadeOfMain ? _shadeColor : color.shade500;
+    final shadeColor = isShadeOfMain ? _shadeColor : (color[500] ?? color[400]);
 
     setState(() {
       _mainColor = color;
@@ -120,7 +99,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     });
   }
 
-  List<Widget> _buildListMainColor(List<MaterialColor> colors) {
+  List<Widget> _buildListMainColor(List<ColorSwatch> colors) {
     List<Widget> circles = [];
     for (final color in colors) {
       final isSelected = _mainColor == color;
@@ -135,22 +114,22 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     return circles;
   }
 
-  List<Color> _getMaterialColorShades(MaterialColor color) {
+  List<Color> _getMaterialColorShades(ColorSwatch color) {
     return [
-      color.shade50,
-      color.shade100,
-      color.shade200,
-      color.shade300,
-      color.shade400,
-      color.shade500,
-      color.shade600,
-      color.shade700,
-      color.shade800,
-      color.shade900
+      color[50],
+      color[100],
+      color[200],
+      color[300],
+      color[400],
+      color[500],
+      color[600],
+      color[700],
+      color[800],
+      color[900]
     ];
   }
 
-  List<Widget> _buildListShadesColor(MaterialColor color) {
+  List<Widget> _buildListShadesColor(ColorSwatch color) {
     List<Widget> circles = [];
 
     circles.add(IconButton(icon: Icon(Icons.arrow_back), onPressed: _onBack));
