@@ -36,6 +36,20 @@ MaterialColorPicker(
 )
 ```
 
+### Listen main color changes
+
+```dart
+MaterialColorPicker(
+    onColorChange: (Color color) {
+        // Handle color changes
+    },
+    onMainColorChange: (ColorSwatch color) {
+        // Handle main color changes
+    },
+    selectedColor: Colors.red
+)
+```
+
 ### Custom colors
 
 In this example, custom colors are a list of Material Colors (class who extend of ColorSwatch).
