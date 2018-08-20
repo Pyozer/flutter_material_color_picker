@@ -14,6 +14,7 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 ### Add to your Flutter project
 
 The package is not upload to Pub yet, so to add it, use this git repository.
+
 ```yaml
 color_picker:
     git: git://github.com/pyozer/color_picker
