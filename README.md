@@ -11,6 +11,20 @@ Example, you can set the color picker in a dialog and display the selected color
 
 These examples use a static color for 'selectedColor', but you can use a variable (state)
 
+### Add to your Flutter project
+
+The package is not upload to Pub yet, so to add it, use this git repository.
+```yaml
+color_picker:
+    git: git://github.com/pyozer/color_picker
+```
+
+### Import
+
+```dart
+import 'package:color_picker/color_picker.dart';
+```
+
 ### Basic
 
 ```dart
