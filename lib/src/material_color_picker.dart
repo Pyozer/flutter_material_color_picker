@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 class MaterialColorPicker extends StatefulWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
+  final ValueChanged<ColorSwatch> onMainColorChange;
   final WrapAlignment colorsAlignment;
   final List<ColorSwatch> colors;
 
-  const MaterialColorPicker(
-      {Key key,
-      this.selectedColor,
-      this.onColorChange,
-      this.colorsAlignment = WrapAlignment.start,
-      this.colors = materialColors})
+  const MaterialColorPicker({Key key,
+    this.selectedColor,
+    this.onColorChange,
+    this.onMainColorChange,
+    this.colorsAlignment = WrapAlignment.start,
+    this.colors = materialColors})
       : super(key: key);
 
   @override
@@ -72,7 +73,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
     List<Color> shades = _getMaterialColorShades(mainColor);
 
-    for (var shade in shades) if (shade == shadeColor) return true;
+    for (var shade in shades)
+      if (shade == shadeColor) return true;
 
     return false;
   }
@@ -86,14 +88,15 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
       _shadeColor = shadeColor;
       _isMainSelection = false;
     });
-    widget.onColorChange(shadeColor);
+    if (widget.onMainColorChange != null) widget.onMainColorChange(color);
+    if (widget.onColorChange != null) widget.onColorChange(shadeColor);
   }
 
   void _onShadeColorSelected(Color color) {
     setState(() {
       _shadeColor = color;
     });
-    widget.onColorChange(color);
+    if (widget.onColorChange != null) widget.onColorChange(color);
   }
 
   void _onBack() {
