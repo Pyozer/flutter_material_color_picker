@@ -77,20 +77,20 @@ MaterialColorPicker(
 There is two step, first choose the main color, and when you press it, you have to choose a shade of the main color.
 By default it's all **Material Colors**, but you can define custom colors, a **list of ColorSwatch**.
 
-![Main color selection](https://github.com/Pyozer/color_picker/blob/master/demo/main_color.png?raw=true)
+<img title="Main color selection" src="https://github.com/Pyozer/color_picker/blob/master/demo/main_color.png?raw=true" width="400" />
 
-![Shade color selection](https://github.com/Pyozer/color_picker/blob/master/demo/shade_color.png?raw=true)
+<img title="Shade color selection" src="https://github.com/Pyozer/color_picker/blob/master/demo/shade_color.png?raw=true" width="400" />
 
 ### Example of usages
 
 You can insert the color picker into a **Dialog**
 
-![Example main color in a dialog](https://github.com/Pyozer/color_picker/blob/master/demo/main_color_dialog.png?raw=true)
+<img title="Example main color in a dialog" src="https://github.com/Pyozer/color_picker/blob/master/demo/main_color_dialog.png?raw=true" width="400" />
 
-![Example shade color in a dialog](https://github.com/Pyozer/color_picker/blob/master/demo/shade_color_dialog.png?raw=true)
+<img title="Example shade color in a dialog" src="https://github.com/Pyozer/color_picker/blob/master/demo/shade_color_dialog.png?raw=true" width="400" />
 
 ### Display color
 
 You can use CircleColor widget, to display the selected color into your settings for example.
 
-![Example of circlecolor widget in ListTile](https://github.com/Pyozer/color_picker/blob/master/demo/example_circle_color.png?raw=true)
+<img title="Example of circlecolor widget in ListTile" src="https://github.com/Pyozer/color_picker/blob/master/demo/example_circle_color.png?raw=true" width="400" />
