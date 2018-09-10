@@ -10,6 +10,7 @@ class MaterialColorPicker extends StatefulWidget {
   final ValueChanged<ColorSwatch> onMainColorChange;
   final List<ColorSwatch> colors;
   final double circleSize;
+  final IconData iconSelected;
 
   const MaterialColorPicker(
       {Key key,
@@ -17,6 +18,7 @@ class MaterialColorPicker extends StatefulWidget {
       this.onColorChange,
       this.onMainColorChange,
       this.colors,
+      this.iconSelected,
       this.circleSize = _kCircleColorSize})
       : super(key: key);
 
@@ -118,6 +120,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
           circleSize: widget.circleSize,
           onColorChoose: () => _onMainColorSelected(color),
           isSelected: isSelected,
+          iconSelected: widget.iconSelected,
         ),
       );
     }
@@ -144,7 +147,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   List<Widget> _buildListShadesColor(ColorSwatch color) {
     List<Widget> circles = [];
 
-    circles.add(IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack));
+    circles.add(
+        IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack));
 
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {
@@ -156,7 +160,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
           circleSize: widget.circleSize,
           onColorChoose: () => _onShadeColorSelected(color),
           isSelected: isSelected,
-          iconSelected: Icons.bubble_chart,
+          iconSelected: widget.iconSelected,
         ),
       );
     }

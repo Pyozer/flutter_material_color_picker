@@ -1,3 +1,12 @@
+## 0.0.4
+
+* Improve design (use GridView)
+* Add (customizable) icon on CircleColor when selected
+
+## 0.0.3
+
+* Fix bug
+
 ## 0.0.2
 
 * Add support of ColorSwatch and not MaterialColor
