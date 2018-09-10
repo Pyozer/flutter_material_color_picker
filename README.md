@@ -1,6 +1,6 @@
-# Color Picker
+# Flutter Material Color Picker
 
-Color picker is a Flutter widget, that can be customizable.
+Material Color picker is a Flutter widget, that can be customizable.
 
 By default, it's Material Colors, but you can define your own colors.
 
