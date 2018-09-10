@@ -16,7 +16,7 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 You just need to add `introduction_screen` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
 ```yaml
-flutter_material_color_picker: ^0.0.3+1
+flutter_material_color_picker: ^0.0.4
 ```
 
 ### Import
