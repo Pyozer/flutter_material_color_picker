@@ -3,18 +3,23 @@ import 'package:color_picker/src/colors.dart';
 import 'package:flutter/material.dart';
 
 class MaterialColorPicker extends StatefulWidget {
+  static const double _kCircleColorSize = 60.0;
+
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
   final ValueChanged<ColorSwatch> onMainColorChange;
   final WrapAlignment colorsAlignment;
   final List<ColorSwatch> colors;
+  final double circleSize;
 
-  const MaterialColorPicker({Key key,
-    this.selectedColor,
-    this.onColorChange,
-    this.onMainColorChange,
-    this.colorsAlignment = WrapAlignment.start,
-    this.colors = materialColors})
+  const MaterialColorPicker(
+      {Key key,
+      this.selectedColor,
+      this.onColorChange,
+      this.onMainColorChange,
+      this.colorsAlignment = WrapAlignment.start,
+      this.colors,
+      this.circleSize = _kCircleColorSize})
       : super(key: key);
 
   @override
@@ -22,8 +27,8 @@ class MaterialColorPicker extends StatefulWidget {
 }
 
 class _MaterialColorPickerState extends State<MaterialColorPicker> {
-  static const double _kCircleColorSize = 47.0;
   static const double _kPadding = 9.0;
+  static const double _kContainerPadding = 16.0;
 
   static final _defaultValue = materialColors[0];
 
@@ -73,8 +78,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
     List<Color> shades = _getMaterialColorShades(mainColor);
 
-    for (var shade in shades)
-      if (shade == shadeColor) return true;
+    for (var shade in shades) if (shade == shadeColor) return true;
 
     return false;
   }
@@ -110,11 +114,14 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     for (final color in colors) {
       final isSelected = _mainColor == color;
 
-      circles.add(CircleColor(
+      circles.add(
+        CircleColor(
           color: color,
-          circleSize: _kCircleColorSize,
+          circleSize: widget.circleSize,
           onColorChoose: () => _onMainColorSelected(color),
-          isSelected: isSelected));
+          isSelected: isSelected,
+        ),
+      );
     }
 
     return circles;
@@ -145,11 +152,15 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     for (final color in shades) {
       final isSelected = _shadeColor == color;
 
-      circles.add(CircleColor(
+      circles.add(
+        CircleColor(
           color: color,
-          circleSize: _kCircleColorSize,
+          circleSize: widget.circleSize,
           onColorChoose: () => _onShadeColorSelected(color),
-          isSelected: isSelected));
+          isSelected: isSelected,
+          iconSelected: Icons.bubble_chart,
+        ),
+      );
     }
     return circles;
   }
@@ -160,13 +171,21 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
         ? _buildListMainColor(_colors)
         : _buildListShadesColor(_mainColor);
 
+    // Size of dialog
+    final double width = MediaQuery.of(context).size.width * .80;
+    // Number of circle per line, depend on width and circleSize
+    final int nbrCircleLine = (width / widget.circleSize).floor();
+
     return Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Wrap(
-            runSpacing: _kPadding,
-            spacing: _kPadding,
-            children: listChildren,
-            verticalDirection: VerticalDirection.down,
-            alignment: widget.colorsAlignment));
+      width: width,
+      child: GridView.count(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(_kContainerPadding),
+        crossAxisSpacing: _kPadding,
+        mainAxisSpacing: _kPadding,
+        crossAxisCount: nbrCircleLine,
+        children: listChildren,
+      ),
+    );
   }
 }
