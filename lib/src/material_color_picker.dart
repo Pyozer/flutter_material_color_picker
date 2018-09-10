@@ -8,7 +8,6 @@ class MaterialColorPicker extends StatefulWidget {
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
   final ValueChanged<ColorSwatch> onMainColorChange;
-  final WrapAlignment colorsAlignment;
   final List<ColorSwatch> colors;
   final double circleSize;
 
@@ -17,7 +16,6 @@ class MaterialColorPicker extends StatefulWidget {
       this.selectedColor,
       this.onColorChange,
       this.onMainColorChange,
-      this.colorsAlignment = WrapAlignment.start,
       this.colors,
       this.circleSize = _kCircleColorSize})
       : super(key: key);
@@ -146,7 +144,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   List<Widget> _buildListShadesColor(ColorSwatch color) {
     List<Widget> circles = [];
 
-    circles.add(IconButton(icon: Icon(Icons.arrow_back), onPressed: _onBack));
+    circles.add(IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack));
 
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {
