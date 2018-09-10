@@ -1,11 +1,7 @@
-## 0.0.4
+## 0.0.3
 
 * Improve design (use GridView)
 * Add (customizable) icon on CircleColor when selected
-
-## 0.0.3
-
-* Fix bug
 
 ## 0.0.2
 
