@@ -16,7 +16,7 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 The package is not upload to Pub yet, so to add it, use this git repository.
 
 ```yaml
-flutter_material_color_picker: ^0.0.3
+flutter_material_color_picker: ^0.0.3+1
 ```
 
 ### Import
