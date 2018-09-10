@@ -16,14 +16,13 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 The package is not upload to Pub yet, so to add it, use this git repository.
 
 ```yaml
-color_picker:
-    git: git://github.com/pyozer/color_picker
+flutter_material_color_picker: ^0.0.3
 ```
 
 ### Import
 
 ```dart
-import 'package:color_picker/color_picker.dart';
+import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 ```
 
 ### Basic
@@ -79,6 +78,7 @@ There is two step, first choose the main color, and when you press it, you have 
 By default it's all **Material Colors**, but you can define custom colors, a **list of ColorSwatch**.
 
 ![Main color selection](https://github.com/Pyozer/color_picker/blob/master/demo/main_color.png?raw=true)
+
 ![Shade color selection](https://github.com/Pyozer/color_picker/blob/master/demo/shade_color.png?raw=true)
 
 ### Example of usages
@@ -86,6 +86,7 @@ By default it's all **Material Colors**, but you can define custom colors, a **l
 You can insert the color picker into a **Dialog**
 
 ![Example main color in a dialog](https://github.com/Pyozer/color_picker/blob/master/demo/main_color_dialog.png?raw=true)
+
 ![Example shade color in a dialog](https://github.com/Pyozer/color_picker/blob/master/demo/shade_color_dialog.png?raw=true)
 
 ### Display color
