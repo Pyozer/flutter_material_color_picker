@@ -1,5 +1,5 @@
-name: color_picker
-description: Color picker for Flutter
+name: flutter_material_color_picker
+description: Material color picker for Flutter
 version: 0.0.3
 author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/color_picker
