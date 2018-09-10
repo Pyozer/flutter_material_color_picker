@@ -1,3 +1,12 @@
+## 0.0.4
+
+* Fix icon on selected color
+* Force icon's color (if light color set black icon, and if dark color set white icon)
+
+## 0.0.3+1
+
+* Edit README
+
 ## 0.0.3
 
 * Improve design (use GridView)

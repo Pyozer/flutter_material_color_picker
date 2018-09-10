@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class MaterialColorPicker extends StatefulWidget {
   static const double _kCircleColorSize = 60.0;
+  static const IconData _kIconSelected = Icons.check;
 
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
@@ -18,7 +19,7 @@ class MaterialColorPicker extends StatefulWidget {
       this.onColorChange,
       this.onMainColorChange,
       this.colors,
-      this.iconSelected,
+      this.iconSelected = _kIconSelected,
       this.circleSize = _kCircleColorSize})
       : super(key: key);
 

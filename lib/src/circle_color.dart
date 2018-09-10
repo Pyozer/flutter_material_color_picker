@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class CircleColor extends StatelessWidget {
   static const double _kColorElevation = 4.0;
-  static const IconData _kIconSelected = Icons.check;
 
   final bool isSelected;
   final Color color;
@@ -18,11 +17,18 @@ class CircleColor extends StatelessWidget {
     this.onColorChoose,
     this.isSelected = false,
     this.elevation = _kColorElevation,
-    this.iconSelected = _kIconSelected,
-  }) : super(key: key);
+    this.iconSelected,
+  })  : assert(color != null),
+        assert(circleSize != null),
+        assert(!isSelected || (isSelected && iconSelected != null)),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final brightnessColor = ThemeData.estimateBrightnessForColor(color);
+    final iconColor =
+        (brightnessColor == Brightness.light) ? Colors.black : Colors.white;
+
     return GestureDetector(
       onTap: onColorChoose,
       child: Material(
@@ -31,7 +37,7 @@ class CircleColor extends StatelessWidget {
         child: CircleAvatar(
           radius: circleSize / 2,
           backgroundColor: color,
-          child: isSelected ? Icon(iconSelected) : null,
+          child: isSelected ? Icon(iconSelected, color: iconColor) : null,
         ),
       ),
     );
