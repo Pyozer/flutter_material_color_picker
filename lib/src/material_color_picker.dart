@@ -75,7 +75,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     for (final mainColor in _colors)
       if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
-    return null;
+    return (shadeColor is ColorSwatch && _colors.contains(shadeColor))
+        ? shadeColor
+        : null;
   }
 
   bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
