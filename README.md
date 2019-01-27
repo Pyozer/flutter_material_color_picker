@@ -13,10 +13,10 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 
 ### Add to your Flutter project
 
-You just need to add `introduction_screen` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+You just need to add `flutter_material_color_picker` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
 ```yaml
-flutter_material_color_picker: ^0.0.4
+flutter_material_color_picker: ^0.0.5
 ```
 
 ### Import
@@ -64,7 +64,6 @@ MaterialColorPicker(
 If `allowShades` is set to `false` then only main colors will be shown and allowed to be selected.
 `onColorChange` will not be called, use `onMainColorChange` instead.
 
-
 ### Custom colors
 
 In this example, custom colors are a list of Material Colors (class who extend of ColorSwatch).
@@ -81,7 +80,7 @@ MaterialColorPicker(
         Colors.deepOrange,
         Colors.yellow,
         Colors.lightGreen
-    ]
+    ],
 )
 ```
 
