@@ -1,3 +1,7 @@
+## 0.05
+
+* Add `allowShades` property
+
 ## 0.0.4
 
 * Fix icon on selected color

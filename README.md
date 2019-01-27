@@ -50,6 +50,21 @@ MaterialColorPicker(
 )
 ```
 
+### Disallow Shades
+
+```dart
+MaterialColorPicker(
+    allowShades: false, // default true
+    onMainColorChange: (ColorSwatch color) {
+        // Handle main color changes
+    },
+    selectedColor: Colors.red
+)
+```
+If `allowShades` is set to `false` then only main colors will be shown and allowed to be selected.
+`onColorChange` will not be called, use `onMainColorChange` instead.
+
+
 ### Custom colors
 
 In this example, custom colors are a list of Material Colors (class who extend of ColorSwatch).
