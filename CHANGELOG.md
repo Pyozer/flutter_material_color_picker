@@ -1,4 +1,4 @@
-## 0.05
+## 0.0.5
 
 * Add `allowShades` property
 
