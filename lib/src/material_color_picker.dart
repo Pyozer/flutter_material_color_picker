@@ -14,16 +14,16 @@ class MaterialColorPicker extends StatefulWidget {
   final double circleSize;
   final IconData iconSelected;
 
-  const MaterialColorPicker(
-      {Key key,
-      this.selectedColor,
-      this.onColorChange,
-      this.onMainColorChange,
-      this.colors,
-      this.allowShades = true,
-      this.iconSelected = _kIconSelected,
-      this.circleSize = _kCircleColorSize})
-      : super(key: key);
+  const MaterialColorPicker({
+    Key key,
+    this.selectedColor,
+    this.onColorChange,
+    this.onMainColorChange,
+    this.colors,
+    this.allowShades = true,
+    this.iconSelected = _kIconSelected,
+    this.circleSize = _kCircleColorSize,
+  }) : super(key: key);
 
   @override
   _MaterialColorPickerState createState() => _MaterialColorPickerState();
@@ -98,38 +98,31 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
       _isMainSelection = false;
     });
     if (widget.onMainColorChange != null) widget.onMainColorChange(color);
-    if (widget.allowShades && widget.onColorChange != null) widget.onColorChange(shadeColor);
+    if (widget.allowShades && widget.onColorChange != null)
+      widget.onColorChange(shadeColor);
   }
 
   void _onShadeColorSelected(Color color) {
-    setState(() {
-      _shadeColor = color;
-    });
+    setState(() => _shadeColor = color);
     if (widget.onColorChange != null) widget.onColorChange(color);
   }
 
   void _onBack() {
-    setState(() {
-      _isMainSelection = true;
-    });
+    setState(() => _isMainSelection = true);
   }
 
   List<Widget> _buildListMainColor(List<ColorSwatch> colors) {
     List<Widget> circles = [];
     for (final color in colors) {
       final isSelected = _mainColor == color;
-
-      circles.add(
-        CircleColor(
-          color: color,
-          circleSize: widget.circleSize,
-          onColorChoose: () => _onMainColorSelected(color),
-          isSelected: isSelected,
-          iconSelected: widget.iconSelected,
-        ),
-      );
+      circles.add(CircleColor(
+        color: color,
+        circleSize: widget.circleSize,
+        onColorChoose: () => _onMainColorSelected(color),
+        isSelected: isSelected,
+        iconSelected: widget.iconSelected,
+      ));
     }
-
     return circles;
   }
 
@@ -153,21 +146,19 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     List<Widget> circles = [];
 
     circles.add(
-        IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack));
+      IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack),
+    );
 
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {
       final isSelected = _shadeColor == color;
-
-      circles.add(
-        CircleColor(
-          color: color,
-          circleSize: widget.circleSize,
-          onColorChoose: () => _onShadeColorSelected(color),
-          isSelected: isSelected,
-          iconSelected: widget.iconSelected,
-        ),
-      );
+      circles.add(CircleColor(
+        color: color,
+        circleSize: widget.circleSize,
+        onColorChoose: () => _onShadeColorSelected(color),
+        isSelected: isSelected,
+        iconSelected: widget.iconSelected,
+      ));
     }
     return circles;
   }

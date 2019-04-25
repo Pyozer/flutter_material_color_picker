@@ -28,27 +28,27 @@ class _HomeScreenState extends State<HomeScreen> {
   void _openDialog(String title, Widget content) {
     showDialog(
       context: context,
-      builder: (dialogCtx) => AlertDialog(
-            contentPadding: const EdgeInsets.all(6.0),
-            title: Text(title),
-            content: content,
-            actions: [
-              FlatButton(
-                child: Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: Text('SUBMIT'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  setState(() => _mainColor = _tempMainColor);
-                  setState(() => _shadeColor = _tempShadeColor);
-                },
-              ),
-            ],
-          ),
+      builder: (_) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(6.0),
+          title: Text(title),
+          content: content,
+          actions: [
+            FlatButton(
+              child: Text('CANCEL'),
+              onPressed: Navigator.of(context).pop,
+            ),
+            FlatButton(
+              child: Text('SUBMIT'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() => _mainColor = _tempMainColor);
+                setState(() => _shadeColor = _tempShadeColor);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -80,8 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Material color picker",
-              style: Theme.of(context).textTheme.headline),
+          Text(
+            "Material color picker",
+            style: Theme.of(context).textTheme.headline,
+          ),
           const SizedBox(height: 62.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
