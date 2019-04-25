@@ -16,7 +16,7 @@ These examples use a static color for 'selectedColor', but you can use a variabl
 You just need to add `flutter_material_color_picker` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
 ```yaml
-flutter_material_color_picker: ^0.0.6
+flutter_material_color_picker: ^1.0.0
 ```
 
 ### Import

@@ -1,6 +1,7 @@
-## 0.0.6
+## 1.0.0
 
 * Code improvement
+* Move to stable version 1.0.0
 
 ## 0.0.5
 
