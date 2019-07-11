@@ -146,18 +146,21 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     List<Widget> circles = [];
 
     circles.add(
-      IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack),
+      IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack, padding: const EdgeInsets.all(4.0),),
     );
 
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {
       final isSelected = _shadeColor == color;
-      circles.add(CircleColor(
-        color: color,
-        circleSize: widget.circleSize,
-        onColorChoose: () => _onShadeColorSelected(color),
-        isSelected: isSelected,
-        iconSelected: widget.iconSelected,
+      circles.add(Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircleColor(
+          color: color,
+          circleSize: widget.circleSize,
+          onColorChoose: () => _onShadeColorSelected(color),
+          isSelected: isSelected,
+          iconSelected: widget.iconSelected,
+        ),
       ));
     }
     return circles;
