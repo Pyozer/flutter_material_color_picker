@@ -11,6 +11,7 @@ class MaterialColorPicker extends StatefulWidget {
   final ValueChanged<ColorSwatch> onMainColorChange;
   final List<ColorSwatch> colors;
   final bool allowShades;
+  final bool onlyShadeSelection;
   final double circleSize;
   final IconData iconSelected;
 
@@ -21,6 +22,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.onMainColorChange,
     this.colors,
     this.allowShades = true,
+    this.onlyShadeSelection = false,
     this.iconSelected = _kIconSelected,
     this.circleSize = _kCircleColorSize,
   }) : super(key: key);
@@ -98,6 +100,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
       _isMainSelection = false;
     });
     if (widget.onMainColorChange != null) widget.onMainColorChange(color);
+    if (widget.onlyShadeSelection && !_isMainSelection) {
+      return;
+    }
     if (widget.allowShades && widget.onColorChange != null)
       widget.onColorChange(shadeColor);
   }
