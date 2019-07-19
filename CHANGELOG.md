@@ -1,3 +1,10 @@
+## 1.0.2
+
+* Add `spacing` option, to define the minimum space between each color
+* Add spacing value in the calculation to determine the number of color to display per line
+* Remove padding added on shades by this [PR](https://github.com/Pyozer/flutter_material_color_picker/pull/9)
+* **You should CHECK SIZE of colors, it could be changed with this update :/**
+
 ## 1.0.1
 
 * Add `onlyShadeSelection` option, to have only shade changes callback (Thanks [@peyter213](https://github.com/Pyozer/flutter_material_color_picker/pull/10))

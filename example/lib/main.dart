@@ -81,7 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
         colors: accentColors,
         selectedColor: _mainColor,
         onMainColorChange: (color) => setState(() => _tempMainColor = color),
-        circleSize: 60.0,
+        circleSize: 40.0,
+        spacing: 10,
       ),
     );
   }

@@ -3,9 +3,6 @@ import 'package:flutter_material_color_picker/src/colors.dart';
 import 'package:flutter/material.dart';
 
 class MaterialColorPicker extends StatefulWidget {
-  static const double _kCircleColorSize = 60.0;
-  static const IconData _kIconSelected = Icons.check;
-
   final Color selectedColor;
   final ValueChanged<Color> onColorChange;
   final ValueChanged<ColorSwatch> onMainColorChange;
@@ -13,6 +10,7 @@ class MaterialColorPicker extends StatefulWidget {
   final bool allowShades;
   final bool onlyShadeSelection;
   final double circleSize;
+  final double spacing;
   final IconData iconSelected;
 
   const MaterialColorPicker({
@@ -23,8 +21,9 @@ class MaterialColorPicker extends StatefulWidget {
     this.colors,
     this.allowShades = true,
     this.onlyShadeSelection = false,
-    this.iconSelected = _kIconSelected,
-    this.circleSize = _kCircleColorSize,
+    this.iconSelected = Icons.check,
+    this.circleSize = 45.0,
+    this.spacing = 9.0,
   }) : super(key: key);
 
   @override
@@ -32,10 +31,7 @@ class MaterialColorPicker extends StatefulWidget {
 }
 
 class _MaterialColorPickerState extends State<MaterialColorPicker> {
-  static const double _kPadding = 9.0;
-  static const double _kContainerPadding = 16.0;
-
-  static final _defaultValue = materialColors[0];
+  final _defaultValue = materialColors[0];
 
   List<ColorSwatch> _colors = materialColors;
 
@@ -158,15 +154,12 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {
       final isSelected = _shadeColor == color;
-      circles.add(Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: CircleColor(
-          color: color,
-          circleSize: widget.circleSize,
-          onColorChoose: () => _onShadeColorSelected(color),
-          isSelected: isSelected,
-          iconSelected: widget.iconSelected,
-        ),
+      circles.add(CircleColor(
+        color: color,
+        circleSize: widget.circleSize,
+        onColorChoose: () => _onShadeColorSelected(color),
+        isSelected: isSelected,
+        iconSelected: widget.iconSelected,
       ));
     }
     return circles;
@@ -181,15 +174,15 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     // Size of dialog
     final double width = MediaQuery.of(context).size.width * .80;
     // Number of circle per line, depend on width and circleSize
-    final int nbrCircleLine = (width / widget.circleSize).floor();
+    final int nbrCircleLine = width ~/ (widget.circleSize + widget.spacing);
 
     return Container(
       width: width,
       child: GridView.count(
         shrinkWrap: true,
-        padding: const EdgeInsets.all(_kContainerPadding),
-        crossAxisSpacing: _kPadding,
-        mainAxisSpacing: _kPadding,
+        padding: const EdgeInsets.all(16.0),
+        crossAxisSpacing: widget.spacing,
+        mainAxisSpacing: widget.spacing,
         crossAxisCount: nbrCircleLine,
         children: listChildren,
       ),
