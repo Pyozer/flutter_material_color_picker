@@ -1,3 +1,9 @@
+## 1.0.1
+
+* Add `onlyShadeSelection` option, to have only shade changes callback (Thanks [@peyter213](https://github.com/Pyozer/flutter_material_color_picker/pull/10))
+* Add predefined colors (accents and full material colors), since this [issue](https://github.com/Pyozer/flutter_material_color_picker/issues/8)
+* Improve code and update example
+
 ## 1.0.0
 
 * Code improvement
