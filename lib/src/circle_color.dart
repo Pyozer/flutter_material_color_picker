@@ -18,8 +18,9 @@ class CircleColor extends StatelessWidget {
     this.isSelected = false,
     this.elevation = _kColorElevation,
     this.iconSelected,
-  })  : assert(color != null),
-        assert(circleSize != null),
+  })  : assert(color != null, "You must provide a not null Color"),
+        assert(circleSize != null, "CircleColor must have a not null size"),
+        assert(circleSize >= 0, "You must provide a positive size"),
         assert(!isSelected || (isSelected && iconSelected != null)),
         super(key: key);
 

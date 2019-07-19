@@ -74,6 +74,29 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _openAccentColorPicker() async {
+    _openDialog(
+      "Accent Color picker",
+      MaterialColorPicker(
+        colors: accentColors,
+        selectedColor: _mainColor,
+        onMainColorChange: (color) => setState(() => _tempMainColor = color),
+        circleSize: 60.0,
+      ),
+    );
+  }
+
+  void _openFullMaterialColorPicker() async {
+    _openDialog(
+      "Full Material Color picker",
+      MaterialColorPicker(
+        colors: fullMaterialColors,
+        selectedColor: _mainColor,
+        onMainColorChange: (color) => setState(() => _tempMainColor = color),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +134,17 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: _openMainColorPicker,
             child: const Text('Show main color picker'),
           ),
-          const Text('(only main color)')
+          const Text('(only main color)'),
+          const SizedBox(height: 16.0),
+          OutlineButton(
+            onPressed: _openAccentColorPicker,
+            child: const Text('Show accent color picker'),
+          ),
+          const SizedBox(height: 16.0),
+          OutlineButton(
+            onPressed: _openFullMaterialColorPicker,
+            child: const Text('Show full material color picker'),
+          ),
         ],
       ),
     );

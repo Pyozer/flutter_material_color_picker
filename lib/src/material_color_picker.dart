@@ -132,27 +132,28 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   List<Color> _getMaterialColorShades(ColorSwatch color) {
-    List<Color> colors = [];
-    if (color[50] != null) colors.add(color[50]);
-    if (color[100] != null) colors.add(color[100]);
-    if (color[200] != null) colors.add(color[200]);
-    if (color[300] != null) colors.add(color[300]);
-    if (color[400] != null) colors.add(color[400]);
-    if (color[500] != null) colors.add(color[500]);
-    if (color[600] != null) colors.add(color[600]);
-    if (color[700] != null) colors.add(color[700]);
-    if (color[800] != null) colors.add(color[800]);
-    if (color[900] != null) colors.add(color[900]);
-
-    return colors;
+    return <Color>[
+      if (color[50] != null) color[50],
+      if (color[200] != null) color[200],
+      if (color[100] != null) color[100],
+      if (color[300] != null) color[300],
+      if (color[400] != null) color[400],
+      if (color[500] != null) color[500],
+      if (color[600] != null) color[600],
+      if (color[700] != null) color[700],
+      if (color[800] != null) color[800],
+      if (color[900] != null) color[900],
+    ];
   }
 
   List<Widget> _buildListShadesColor(ColorSwatch color) {
-    List<Widget> circles = [];
-
-    circles.add(
-      IconButton(icon: const Icon(Icons.arrow_back), onPressed: _onBack, padding: const EdgeInsets.only(right: 2.0),),
-    );
+    List<Widget> circles = [
+      IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: _onBack,
+        padding: const EdgeInsets.only(right: 2.0),
+      ),
+    ];
 
     final shades = _getMaterialColorShades(color);
     for (final color in shades) {

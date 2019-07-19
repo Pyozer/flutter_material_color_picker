@@ -1,6 +1,6 @@
 name: flutter_material_color_picker
 description: Material color picker with some possible customizations for Flutter apps
-version: 1.0.0
+version: 1.0.1
 author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/color_picker
 
@@ -9,4 +9,4 @@ dependencies:
     sdk: flutter
 
 environment:
-  sdk: '>=2.0.0-dev.58.0 <3.0.0'
+  sdk: '>=2.2.2 <3.0.0'
