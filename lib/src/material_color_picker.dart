@@ -130,8 +130,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   List<Color> _getMaterialColorShades(ColorSwatch color) {
     return <Color>[
       if (color[50] != null) color[50],
-      if (color[200] != null) color[200],
       if (color[100] != null) color[100],
+      if (color[200] != null) color[200],
       if (color[300] != null) color[300],
       if (color[400] != null) color[400],
       if (color[500] != null) color[500],
