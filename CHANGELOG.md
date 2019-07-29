@@ -1,3 +1,9 @@
+## 1.0.3
+
+* Add `onBack` callback to catch back button press ([See this issue](https://github.com/Pyozer/flutter_material_color_picker/issues/12))
+* Fix color shade order mistake (Thanks to [@pczn0327](https://github.com/Pyozer/flutter_material_color_picker/pull/13))
+* Code improvement
+
 ## 1.0.2
 
 * Add `spacing` option, to define the minimum space between each color

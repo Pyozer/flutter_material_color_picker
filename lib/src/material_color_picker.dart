@@ -12,6 +12,7 @@ class MaterialColorPicker extends StatefulWidget {
   final double circleSize;
   final double spacing;
   final IconData iconSelected;
+  final VoidCallback onBack;
 
   const MaterialColorPicker({
     Key key,
@@ -24,6 +25,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.iconSelected = Icons.check,
     this.circleSize = 45.0,
     this.spacing = 9.0,
+    this.onBack,
   }) : super(key: key);
 
   @override
@@ -79,10 +81,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
-    List<Color> shades = _getMaterialColorShades(mainColor);
-
-    for (var shade in shades) if (shade == shadeColor) return true;
-
+    for (final shade in _getMaterialColorShades(mainColor)) {
+      if (shade == shadeColor) return true;
+    }
     return false;
   }
 
@@ -110,21 +111,20 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   void _onBack() {
     setState(() => _isMainSelection = true);
+    if (widget.onBack != null) widget.onBack();
   }
 
   List<Widget> _buildListMainColor(List<ColorSwatch> colors) {
-    List<Widget> circles = [];
-    for (final color in colors) {
-      final isSelected = _mainColor == color;
-      circles.add(CircleColor(
-        color: color,
-        circleSize: widget.circleSize,
-        onColorChoose: () => _onMainColorSelected(color),
-        isSelected: isSelected,
-        iconSelected: widget.iconSelected,
-      ));
-    }
-    return circles;
+    return [
+      for (final color in colors)
+        CircleColor(
+          color: color,
+          circleSize: widget.circleSize,
+          onColorChoose: () => _onMainColorSelected(color),
+          isSelected: _mainColor == color,
+          iconSelected: widget.iconSelected,
+        )
+    ];
   }
 
   List<Color> _getMaterialColorShades(ColorSwatch color) {
@@ -143,26 +143,21 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   List<Widget> _buildListShadesColor(ColorSwatch color) {
-    List<Widget> circles = [
+    return [
       IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: _onBack,
         padding: const EdgeInsets.only(right: 2.0),
       ),
+      for (final color in _getMaterialColorShades(color))
+        CircleColor(
+          color: color,
+          circleSize: widget.circleSize,
+          onColorChoose: () => _onShadeColorSelected(color),
+          isSelected: _shadeColor == color,
+          iconSelected: widget.iconSelected,
+        ),
     ];
-
-    final shades = _getMaterialColorShades(color);
-    for (final color in shades) {
-      final isSelected = _shadeColor == color;
-      circles.add(CircleColor(
-        color: color,
-        circleSize: widget.circleSize,
-        onColorChoose: () => _onShadeColorSelected(color),
-        isSelected: isSelected,
-        iconSelected: widget.iconSelected,
-      ));
-    }
-    return circles;
   }
 
   @override

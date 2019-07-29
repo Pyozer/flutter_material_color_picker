@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedColor: _shadeColor,
         onColorChange: (color) => setState(() => _tempShadeColor = color),
         onMainColorChange: (color) => setState(() => _tempMainColor = color),
+        onBack: () => print("Back button pressed"),
       ),
     );
   }
