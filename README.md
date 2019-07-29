@@ -61,6 +61,7 @@ MaterialColorPicker(
     selectedColor: Colors.red
 )
 ```
+
 If `allowShades` is set to `false` then only main colors will be shown and allowed to be selected.
 `onColorChange` will not be called, use `onMainColorChange` instead.
 

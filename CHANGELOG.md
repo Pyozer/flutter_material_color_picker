@@ -1,3 +1,5 @@
+# CHANGELOG
+
 ## 1.0.3
 
 * Add `onBack` callback to catch back button press ([See this issue](https://github.com/Pyozer/flutter_material_color_picker/issues/12))
