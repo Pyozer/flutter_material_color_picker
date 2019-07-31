@@ -7,6 +7,8 @@ class MaterialColorPicker extends StatefulWidget {
   final ValueChanged<Color> onColorChange;
   final ValueChanged<ColorSwatch> onMainColorChange;
   final List<ColorSwatch> colors;
+  final bool shrinkWrap;
+  final ScrollPhysics physics;
   final bool allowShades;
   final bool onlyShadeSelection;
   final double circleSize;
@@ -20,6 +22,8 @@ class MaterialColorPicker extends StatefulWidget {
     this.onColorChange,
     this.onMainColorChange,
     this.colors,
+    this.shrinkWrap = true,
+    this.physics,
     this.allowShades = true,
     this.onlyShadeSelection = false,
     this.iconSelected = Icons.check,
@@ -174,7 +178,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     return Container(
       width: width,
       child: GridView.count(
-        shrinkWrap: true,
+        shrinkWrap: widget.shrinkWrap,
+        physics: widget.physics,
         padding: const EdgeInsets.all(16.0),
         crossAxisSpacing: widget.spacing,
         mainAxisSpacing: widget.spacing,
