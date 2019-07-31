@@ -22,7 +22,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.onColorChange,
     this.onMainColorChange,
     this.colors,
-    this.shrinkWrap = true,
+    this.shrinkWrap = false,
     this.physics,
     this.allowShades = true,
     this.onlyShadeSelection = false,
