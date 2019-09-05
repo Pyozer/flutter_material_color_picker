@@ -15,6 +15,7 @@ class MaterialColorPicker extends StatefulWidget {
   final double spacing;
   final IconData iconSelected;
   final VoidCallback onBack;
+  final double elevation;
 
   const MaterialColorPicker({
     Key key,
@@ -30,6 +31,7 @@ class MaterialColorPicker extends StatefulWidget {
     this.circleSize = 45.0,
     this.spacing = 9.0,
     this.onBack,
+    this.elevation,
   }) : super(key: key);
 
   @override
@@ -127,6 +129,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
           onColorChoose: () => _onMainColorSelected(color),
           isSelected: _mainColor == color,
           iconSelected: widget.iconSelected,
+          elevation: widget.elevation,
         )
     ];
   }
@@ -160,6 +163,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
           onColorChoose: () => _onShadeColorSelected(color),
           isSelected: _shadeColor == color,
           iconSelected: widget.iconSelected,
+          elevation: widget.elevation,
         ),
     ];
   }
