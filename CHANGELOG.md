@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5
+
+* Fix issue with `elevation` property that cause crashes
+
 ## 1.0.4
 
 * Add `physics` property ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/14))
