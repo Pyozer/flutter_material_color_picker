@@ -32,7 +32,7 @@ class CircleColor extends StatelessWidget {
     return GestureDetector(
       onTap: onColorChoose,
       child: Material(
-        elevation: elevation,
+        elevation: elevation ?? _kColorElevation,
         shape: const CircleBorder(),
         child: CircleAvatar(
           radius: circleSize / 2,
