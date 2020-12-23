@@ -20,10 +20,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Use temp variable to only update color when press dialog 'submit' button
-  ColorSwatch _tempMainColor;
-  Color _tempShadeColor;
-  ColorSwatch _mainColor = Colors.blue;
-  Color _shadeColor = Colors.blue[800];
+  ColorSwatch? _tempMainColor;
+  Color? _tempShadeColor;
+  ColorSwatch? _mainColor = Colors.blue;
+  Color? _shadeColor = Colors.blue[800];
 
   void _openDialog(String title, Widget content) {
     showDialog(
@@ -36,12 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             FlatButton(
               child: Text('CANCEL'),
-              onPressed: Navigator.of(context).pop,
+              onPressed: Navigator.of(context)?.pop,
             ),
             FlatButton(
               child: Text('SUBMIT'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context)?.pop();
                 setState(() => _mainColor = _tempMainColor);
                 setState(() => _shadeColor = _tempShadeColor);
               },
