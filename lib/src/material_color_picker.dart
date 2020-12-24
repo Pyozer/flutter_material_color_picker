@@ -67,7 +67,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
     if (mainColor == null) {
       mainColor = _colors?[0];
-      shadeColor = mainColor?[500] ?? mainColor?[400];
+      shadeColor = mainColor![500] ?? mainColor[400];
     }
 
     setState(() {
@@ -96,7 +96,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   void _onMainColorSelected(ColorSwatch? color) {
     var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
     final shadeColor =
-        isShadeOfMain ? _shadeColor : (color?[500] ?? color?[400]);
+        isShadeOfMain ? _shadeColor : (color![500] ?? color[400]);
 
     setState(() {
       _mainColor = color;
