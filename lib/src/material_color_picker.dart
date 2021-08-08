@@ -3,22 +3,22 @@ import 'package:flutter_material_color_picker/src/colors.dart';
 import 'package:flutter/material.dart';
 
 class MaterialColorPicker extends StatefulWidget {
-  final Color selectedColor;
-  final ValueChanged<Color> onColorChange;
-  final ValueChanged<ColorSwatch> onMainColorChange;
-  final List<ColorSwatch> colors;
+  final Color? selectedColor;
+  final ValueChanged<Color>? onColorChange;
+  final ValueChanged<ColorSwatch?>? onMainColorChange;
+  final List<ColorSwatch>? colors;
   final bool shrinkWrap;
-  final ScrollPhysics physics;
+  final ScrollPhysics? physics;
   final bool allowShades;
   final bool onlyShadeSelection;
   final double circleSize;
   final double spacing;
   final IconData iconSelected;
-  final VoidCallback onBack;
-  final double elevation;
+  final VoidCallback? onBack;
+  final double? elevation;
 
   const MaterialColorPicker({
-    Key key,
+    Key? key,
     this.selectedColor,
     this.onColorChange,
     this.onMainColorChange,
@@ -41,11 +41,11 @@ class MaterialColorPicker extends StatefulWidget {
 class _MaterialColorPickerState extends State<MaterialColorPicker> {
   final _defaultValue = materialColors[0];
 
-  List<ColorSwatch> _colors = materialColors;
+  List<ColorSwatch>? _colors = materialColors;
 
-  ColorSwatch _mainColor;
-  Color _shadeColor;
-  bool _isMainSelection;
+  ColorSwatch? _mainColor;
+  Color? _shadeColor;
+  bool? _isMainSelection;
 
   @override
   void initState() {
@@ -62,12 +62,12 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   void _initSelectedValue() {
     if (widget.colors != null) _colors = widget.colors;
 
-    Color shadeColor = widget.selectedColor ?? _defaultValue;
-    ColorSwatch mainColor = _findMainColor(shadeColor);
+    Color? shadeColor = widget.selectedColor ?? _defaultValue;
+    ColorSwatch? mainColor = _findMainColor(shadeColor);
 
     if (mainColor == null) {
-      mainColor = _colors[0];
-      shadeColor = mainColor[500] ?? mainColor[400];
+      mainColor = _colors?[0];
+      shadeColor = mainColor![500] ?? mainColor[400];
     }
 
     setState(() {
@@ -77,47 +77,48 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     });
   }
 
-  ColorSwatch _findMainColor(Color shadeColor) {
-    for (final mainColor in _colors)
+  ColorSwatch? _findMainColor(Color shadeColor) {
+    for (final ColorSwatch? mainColor in _colors!)
       if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
-    return (shadeColor is ColorSwatch && _colors.contains(shadeColor))
+    return (shadeColor is ColorSwatch && _colors!.contains(shadeColor))
         ? shadeColor
         : null;
   }
 
-  bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
-    for (final shade in _getMaterialColorShades(mainColor)) {
+  bool _isShadeOfMain(ColorSwatch? mainColor, Color? shadeColor) {
+    for (final shade in _getMaterialColorShades(mainColor!)) {
       if (shade == shadeColor) return true;
     }
     return false;
   }
 
-  void _onMainColorSelected(ColorSwatch color) {
+  void _onMainColorSelected(ColorSwatch? color) {
     var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
-    final shadeColor = isShadeOfMain ? _shadeColor : (color[500] ?? color[400]);
+    final shadeColor =
+        isShadeOfMain ? _shadeColor : (color![500] ?? color[400]);
 
     setState(() {
       _mainColor = color;
       _shadeColor = shadeColor;
       _isMainSelection = false;
     });
-    if (widget.onMainColorChange != null) widget.onMainColorChange(color);
-    if (widget.onlyShadeSelection && !_isMainSelection) {
+    if (widget.onMainColorChange != null) widget.onMainColorChange?.call(color);
+    if (widget.onlyShadeSelection && !(_isMainSelection ?? false)) {
       return;
     }
     if (widget.allowShades && widget.onColorChange != null)
-      widget.onColorChange(shadeColor);
+      widget.onColorChange?.call(shadeColor!);
   }
 
   void _onShadeColorSelected(Color color) {
     setState(() => _shadeColor = color);
-    if (widget.onColorChange != null) widget.onColorChange(color);
+    if (widget.onColorChange != null) widget.onColorChange?.call(color);
   }
 
   void _onBack() {
     setState(() => _isMainSelection = true);
-    if (widget.onBack != null) widget.onBack();
+    if (widget.onBack != null) widget.onBack?.call();
   }
 
   List<Widget> _buildListMainColor(List<ColorSwatch> colors) {
@@ -136,16 +137,16 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   List<Color> _getMaterialColorShades(ColorSwatch color) {
     return <Color>[
-      if (color[50] != null) color[50],
-      if (color[100] != null) color[100],
-      if (color[200] != null) color[200],
-      if (color[300] != null) color[300],
-      if (color[400] != null) color[400],
-      if (color[500] != null) color[500],
-      if (color[600] != null) color[600],
-      if (color[700] != null) color[700],
-      if (color[800] != null) color[800],
-      if (color[900] != null) color[900],
+      if (color[50] != null) color[50]!,
+      if (color[100] != null) color[100]!,
+      if (color[200] != null) color[200]!,
+      if (color[300] != null) color[300]!,
+      if (color[400] != null) color[400]!,
+      if (color[500] != null) color[500]!,
+      if (color[600] != null) color[600]!,
+      if (color[700] != null) color[700]!,
+      if (color[800] != null) color[800]!,
+      if (color[900] != null) color[900]!,
     ];
   }
 
@@ -170,9 +171,9 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final listChildren = _isMainSelection || !widget.allowShades
-        ? _buildListMainColor(_colors)
-        : _buildListShadesColor(_mainColor);
+    final listChildren = _isMainSelection ?? false || !widget.allowShades
+        ? _buildListMainColor(_colors!)
+        : _buildListShadesColor(_mainColor!);
 
     // Size of dialog
     final double width = MediaQuery.of(context).size.width * .80;
