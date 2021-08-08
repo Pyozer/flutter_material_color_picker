@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0
+
+* Migrate to null safety ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/24))
+* **Can be a break change:** Default shrinkWrap to true ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/21))
+* **Can be a break change:** Callback onColorChange of CircleColor widget now has the color in parameter ([See this issue](https://github.com/Pyozer/flutter_material_color_picker/issues/25))
+
 ## 1.0.5
 
 * Fix issue with `elevation` property that cause crashes
