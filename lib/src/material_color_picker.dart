@@ -41,11 +41,11 @@ class MaterialColorPicker extends StatefulWidget {
 class _MaterialColorPickerState extends State<MaterialColorPicker> {
   final _defaultValue = materialColors[0];
 
-  List<ColorSwatch>? _colors = materialColors;
+  List<ColorSwatch> _colors = materialColors;
 
-  ColorSwatch? _mainColor;
-  Color? _shadeColor;
-  bool? _isMainSelection;
+  late ColorSwatch _mainColor;
+  late Color _shadeColor;
+  bool _isMainSelection = true;
 
   @override
   void initState() {
@@ -60,28 +60,28 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   void _initSelectedValue() {
-    if (widget.colors != null) _colors = widget.colors;
+    _colors = widget.colors ?? materialColors;
 
-    Color? shadeColor = widget.selectedColor ?? _defaultValue;
+    Color shadeColor = widget.selectedColor ?? _defaultValue;
     ColorSwatch? mainColor = _findMainColor(shadeColor);
 
+    // If mainColor not found from shade, so mean that shade is wrong
     if (mainColor == null) {
-      mainColor = _colors?[0];
-      shadeColor = mainColor![500] ?? mainColor[400];
+      mainColor = _colors[0];
+      shadeColor = mainColor[500] ?? mainColor[400]!;
     }
-
     setState(() {
-      _mainColor = mainColor;
+      _mainColor = mainColor!;
       _shadeColor = shadeColor;
       _isMainSelection = true;
     });
   }
 
   ColorSwatch? _findMainColor(Color shadeColor) {
-    for (final ColorSwatch? mainColor in _colors!)
+    for (final ColorSwatch mainColor in _colors)
       if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
 
-    return (shadeColor is ColorSwatch && _colors!.contains(shadeColor))
+    return (shadeColor is ColorSwatch && _colors.contains(shadeColor))
         ? shadeColor
         : null;
   }
@@ -93,10 +93,10 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     return false;
   }
 
-  void _onMainColorSelected(ColorSwatch? color) {
+  void _onMainColorSelected(ColorSwatch color) {
     var isShadeOfMain = _isShadeOfMain(color, _shadeColor);
     final shadeColor =
-        isShadeOfMain ? _shadeColor : (color![500] ?? color[400]);
+        isShadeOfMain ? _shadeColor : (color[500] ?? color[400]!);
 
     setState(() {
       _mainColor = color;
@@ -104,11 +104,11 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
       _isMainSelection = false;
     });
     if (widget.onMainColorChange != null) widget.onMainColorChange?.call(color);
-    if (widget.onlyShadeSelection && !(_isMainSelection ?? false)) {
+    if (widget.onlyShadeSelection && !_isMainSelection) {
       return;
     }
     if (widget.allowShades && widget.onColorChange != null)
-      widget.onColorChange?.call(shadeColor!);
+      widget.onColorChange?.call(shadeColor);
   }
 
   void _onShadeColorSelected(Color color) {
@@ -127,7 +127,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
         CircleColor(
           color: color,
           circleSize: widget.circleSize,
-          onColorChoose: () => _onMainColorSelected(color),
+          onColorChoose: (_) => _onMainColorSelected(color),
           isSelected: _mainColor == color,
           iconSelected: widget.iconSelected,
           elevation: widget.elevation,
@@ -161,7 +161,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
         CircleColor(
           color: color,
           circleSize: widget.circleSize,
-          onColorChoose: () => _onShadeColorSelected(color),
+          onColorChoose: _onShadeColorSelected,
           isSelected: _shadeColor == color,
           iconSelected: widget.iconSelected,
           elevation: widget.elevation,
@@ -171,12 +171,12 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final listChildren = _isMainSelection ?? false || !widget.allowShades
-        ? _buildListMainColor(_colors!)
-        : _buildListShadesColor(_mainColor!);
+    final listChildren = _isMainSelection || !widget.allowShades
+        ? _buildListMainColor(_colors)
+        : _buildListShadesColor(_mainColor);
 
     // Size of dialog
-    final double width = MediaQuery.of(context).size.width * .80;
+    final double width = MediaQuery.of(context).size.width * 0.8;
     // Number of circle per line, depend on width and circleSize
     final int nbrCircleLine = width ~/ (widget.circleSize + widget.spacing);
 

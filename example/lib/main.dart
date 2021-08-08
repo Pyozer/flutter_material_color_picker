@@ -34,14 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(title),
           content: content,
           actions: [
-            FlatButton(
+            TextButton(
               child: Text('CANCEL'),
-              onPressed: Navigator.of(context)?.pop,
+              onPressed: Navigator.of(context).pop,
             ),
-            FlatButton(
+            TextButton(
               child: Text('SUBMIT'),
               onPressed: () {
-                Navigator.of(context)?.pop();
+                Navigator.of(context).pop();
                 setState(() => _mainColor = _tempMainColor);
                 setState(() => _shadeColor = _tempShadeColor);
               },
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(
             "Material color picker",
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(height: 62.0),
           Row(
@@ -127,23 +127,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const SizedBox(height: 32.0),
-          OutlineButton(
+          OutlinedButton(
             onPressed: _openColorPicker,
             child: const Text('Show color picker'),
           ),
           const SizedBox(height: 16.0),
-          OutlineButton(
+          OutlinedButton(
             onPressed: _openMainColorPicker,
             child: const Text('Show main color picker'),
           ),
           const Text('(only main color)'),
           const SizedBox(height: 16.0),
-          OutlineButton(
+          OutlinedButton(
             onPressed: _openAccentColorPicker,
             child: const Text('Show accent color picker'),
           ),
           const SizedBox(height: 16.0),
-          OutlineButton(
+          OutlinedButton(
             onPressed: _openFullMaterialColorPicker,
             child: const Text('Show full material color picker'),
           ),
