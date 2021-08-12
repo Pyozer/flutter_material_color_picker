@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0+2
+
+* Minor null safety improvements ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/27))
+
 ## 1.1.0+1
 
 * Re-create projet to update all secondary files. Example app can now be run on web.
