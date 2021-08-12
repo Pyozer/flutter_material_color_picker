@@ -86,8 +86,8 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
         : null;
   }
 
-  bool _isShadeOfMain(ColorSwatch? mainColor, Color? shadeColor) {
-    for (final shade in _getMaterialColorShades(mainColor!)) {
+  bool _isShadeOfMain(ColorSwatch mainColor, Color shadeColor) {
+    for (final shade in _getMaterialColorShades(mainColor)) {
       if (shade == shadeColor) return true;
     }
     return false;
@@ -103,22 +103,23 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
       _shadeColor = shadeColor;
       _isMainSelection = false;
     });
-    if (widget.onMainColorChange != null) widget.onMainColorChange?.call(color);
+    widget.onMainColorChange?.call(color);
     if (widget.onlyShadeSelection && !_isMainSelection) {
       return;
     }
-    if (widget.allowShades && widget.onColorChange != null)
+    if (widget.allowShades) {
       widget.onColorChange?.call(shadeColor);
+    }
   }
 
   void _onShadeColorSelected(Color color) {
     setState(() => _shadeColor = color);
-    if (widget.onColorChange != null) widget.onColorChange?.call(color);
+    widget.onColorChange?.call(color);
   }
 
   void _onBack() {
     setState(() => _isMainSelection = true);
-    if (widget.onBack != null) widget.onBack?.call();
+    widget.onBack?.call();
   }
 
   List<Widget> _buildListMainColor(List<ColorSwatch> colors) {
