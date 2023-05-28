@@ -7,6 +7,7 @@ class MaterialColorPicker extends StatefulWidget {
   final ValueChanged<Color>? onColorChange;
   final ValueChanged<ColorSwatch?>? onMainColorChange;
   final List<ColorSwatch>? colors;
+  @Deprecated('No longer used')
   final bool shrinkWrap;
   final ScrollPhysics? physics;
   final bool allowShades;
@@ -16,6 +17,9 @@ class MaterialColorPicker extends StatefulWidget {
   final IconData iconSelected;
   final VoidCallback? onBack;
   final double? elevation;
+  final WrapAlignment alignment;
+  final WrapAlignment runAlignment;
+  final WrapCrossAlignment crossAxisAlignment;
 
   const MaterialColorPicker({
     Key? key,
@@ -32,6 +36,9 @@ class MaterialColorPicker extends StatefulWidget {
     this.spacing = 9.0,
     this.onBack,
     this.elevation,
+    this.alignment = WrapAlignment.start,
+    this.runAlignment = WrapAlignment.center,
+    this.crossAxisAlignment = WrapCrossAlignment.center,
   }) : super(key: key);
 
   @override
@@ -176,20 +183,14 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
         ? _buildListMainColor(_colors)
         : _buildListShadesColor(_mainColor);
 
-    // Size of dialog
-    final double width = MediaQuery.of(context).size.width * 0.8;
-    // Number of circle per line, depend on width and circleSize
-    final int nbrCircleLine = width ~/ (widget.circleSize + widget.spacing);
-
-    return Container(
-      width: width,
-      child: GridView.count(
-        shrinkWrap: widget.shrinkWrap,
-        physics: widget.physics,
-        padding: const EdgeInsets.all(16.0),
-        crossAxisSpacing: widget.spacing,
-        mainAxisSpacing: widget.spacing,
-        crossAxisCount: nbrCircleLine,
+    return SingleChildScrollView(
+      physics: widget.physics,
+      child: Wrap(
+        alignment: widget.alignment,
+        runAlignment: widget.runAlignment,
+        crossAxisAlignment: widget.crossAxisAlignment,
+        runSpacing: widget.spacing,
+        spacing: widget.spacing,
         children: listChildren,
       ),
     );
