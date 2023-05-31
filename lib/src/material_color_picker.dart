@@ -42,10 +42,10 @@ class MaterialColorPicker extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MaterialColorPickerState createState() => _MaterialColorPickerState();
+  MaterialColorPickerState createState() => MaterialColorPickerState();
 }
 
-class _MaterialColorPickerState extends State<MaterialColorPicker> {
+class MaterialColorPickerState extends State<MaterialColorPicker> {
   final _defaultValue = materialColors[0];
 
   List<ColorSwatch> _colors = materialColors;
@@ -60,7 +60,7 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
     _initSelectedValue();
   }
 
-  @protected
+  @override
   void didUpdateWidget(covariant MaterialColorPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
     _initSelectedValue();
@@ -85,8 +85,11 @@ class _MaterialColorPickerState extends State<MaterialColorPicker> {
   }
 
   ColorSwatch? _findMainColor(Color shadeColor) {
-    for (final ColorSwatch mainColor in _colors)
-      if (_isShadeOfMain(mainColor, shadeColor)) return mainColor;
+    for (final ColorSwatch mainColor in _colors) {
+      if (_isShadeOfMain(mainColor, shadeColor)) {
+        return mainColor;
+      }
+    }
 
     return (shadeColor is ColorSwatch && _colors.contains(shadeColor))
         ? shadeColor

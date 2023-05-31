@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Material Color Picker",
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
 
 class HomeScreen extends StatefulWidget {
-  _HomeScreenState createState() => _HomeScreenState();
+  const HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   // Use temp variable to only update color when press dialog 'submit' button
   ColorSwatch? _tempMainColor;
   Color? _tempShadeColor;
@@ -35,16 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
           content: content,
           actions: [
             TextButton(
-              child: Text('CANCEL'),
               onPressed: Navigator.of(context).pop,
+              child: const Text('CANCEL'),
             ),
             TextButton(
-              child: Text('SUBMIT'),
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() => _mainColor = _tempMainColor);
                 setState(() => _shadeColor = _tempShadeColor);
               },
+              child: const Text('SUBMIT'),
             ),
           ],
         );
@@ -102,53 +107,55 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Material color picker",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 62.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundColor: _mainColor,
-                  radius: 35.0,
-                  child: const Text("MAIN"),
-                ),
-                const SizedBox(width: 16.0),
-                CircleAvatar(
-                  backgroundColor: _shadeColor,
-                  radius: 35.0,
-                  child: const Text("SHADE"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 32.0),
-            OutlinedButton(
-              onPressed: _openColorPicker,
-              child: const Text('Show color picker'),
-            ),
-            const SizedBox(height: 16.0),
-            OutlinedButton(
-              onPressed: _openMainColorPicker,
-              child: const Text('Show main color picker'),
-            ),
-            const Text('(only main color)'),
-            const SizedBox(height: 16.0),
-            OutlinedButton(
-              onPressed: _openAccentColorPicker,
-              child: const Text('Show accent color picker'),
-            ),
-            const SizedBox(height: 16.0),
-            OutlinedButton(
-              onPressed: _openFullMaterialColorPicker,
-              child: const Text('Show full material color picker'),
-            ),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Material color picker",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 62.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: _mainColor,
+                    radius: 35.0,
+                    child: const Text("MAIN"),
+                  ),
+                  const SizedBox(width: 16.0),
+                  CircleAvatar(
+                    backgroundColor: _shadeColor,
+                    radius: 35.0,
+                    child: const Text("SHADE"),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32.0),
+              OutlinedButton(
+                onPressed: _openColorPicker,
+                child: const Text('Show color picker'),
+              ),
+              const SizedBox(height: 16.0),
+              OutlinedButton(
+                onPressed: _openMainColorPicker,
+                child: const Text('Show main color picker'),
+              ),
+              const Text('(only main color)'),
+              const SizedBox(height: 16.0),
+              OutlinedButton(
+                onPressed: _openAccentColorPicker,
+                child: const Text('Show accent color picker'),
+              ),
+              const SizedBox(height: 16.0),
+              OutlinedButton(
+                onPressed: _openFullMaterialColorPicker,
+                child: const Text('Show full material color picker'),
+              ),
+            ],
+          ),
         ),
       ),
     );

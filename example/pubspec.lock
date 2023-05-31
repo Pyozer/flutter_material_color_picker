@@ -21,15 +21,23 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      sha256: "486b7bc707424572cdf7bd7e812a0c146de3fd47ecadf070254cc60383f21dd8"
+      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.5"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      sha256: aeb0b80a8b3709709c9cc496cdc027c5b3216796bc0af0ce1007eaf24464fd4c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   flutter_material_color_picker:
     dependency: "direct main"
     description:
@@ -45,6 +53,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      sha256: "6b0206b0bf4f04961fc5438198ccb3a885685cd67d4d4a32cc20ad7f8adbe015"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   material_color_utilities:
     dependency: transitive
     description:
@@ -75,5 +91,5 @@ packages:
     source: hosted
     version: "2.1.4"
 sdks:
-  dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=1.17.0"
+  dart: ">=3.0.2 <4.0.0"
+  flutter: ">=3.3.0"

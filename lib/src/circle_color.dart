@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef void OnColorChoose(Color color);
+typedef OnColorChoose = void Function(Color color);
 
 class CircleColor extends StatelessWidget {
   static const double _kColorElevation = 4.0;
