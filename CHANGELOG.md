@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+
+* **Can be a break change:** Change to use a `Wrap` rather than a `GridView` ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/30))
+
 ## 1.1.0+2
 
 * Minor null safety improvements ([See this PR](https://github.com/Pyozer/flutter_material_color_picker/pull/27))
